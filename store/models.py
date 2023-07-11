@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from category.models import Category
 # Create your models here.
 
@@ -19,3 +20,6 @@ class Product(models.Model):
     
     def discount(self):
         return round(self.price - (self.price * 0.2))
+    
+    def get_url(self):
+        return reverse('product_detail', args=[self.category.slug, self.slug])
